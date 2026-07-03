@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="id" class="scroll-smooth">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Farhan Zaky | Fullstack Web Developer Portfolio</title>
+		<meta
+			name="description"
+			content="Portfolio professional Farhan Zaky, Fullstack Web Developer dan Mahasiswa Informatika di Universitas Sibermu. Berpengalaman dalam Laravel, Svelte, Tailwind CSS, PHP, TypeScript."
+		/>
+		<meta
+			name="keywords"
+			content="Farhan Zaky, Fullstack Web Developer, Svelte, Laravel, Tailwind CSS, TypeScript, PHP, Sibermu University, Portfolio"
+		/>
+		<meta name="author" content="Farhan Zaky" />
+
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- Pre-prevent flash background styling -->
+		<style>
+			html,
+			body {
+				background-color: #050816;
+				color: #f3f4f6;
+				overflow-x: hidden;
+			}
+		</style>
+		%sveltekit.head%
+	</head>
+	<body
+		data-sveltekit-preload-data="hover"
+		class="bg-bg-deep font-sans text-gray-100 selection:bg-cyan-500/30 selection:text-cyan-400"
+	>
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+</html>
