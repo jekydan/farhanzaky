@@ -4,7 +4,7 @@
 	import { floatingIcons } from '$lib/data/techStack';
 
 	const roles = [
-		'Fullstack Developer',
+		'Web Developer',
 		'Frontend Developer',
 		'Backend Developer',
 		'Svelte Developer',
@@ -151,7 +151,7 @@
 
 			<ScrollReveal animation="fade-up" delay={500}>
 				<p class="text-slate-400 text-base md:text-lg font-light leading-relaxed max-w-xl mb-8">
-					Mahasiswa Informatika di <span class="text-white font-medium">Sibermu University</span> yang
+					Mahasiswa Informatika di <span class="text-white font-medium">Siber Muhamadiyah University</span> yang
 					fokus pada web development modern. Senang merakit arsitektur kode yang bersih dan antarmuka
 					premium berkecepatan tinggi.
 				</p>

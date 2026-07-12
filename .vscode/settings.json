@@ -1,5 +1,14 @@
 {
 	"files.associations": {
 		"*.css": "tailwindcss"
-	}
+	},
+	"typescript.tsdk": "node_modules/typescript/lib",
+	"css.validate": false,
+	"scss.validate": false,
+	"less.validate": false,
+	"editor.quickSuggestions": {
+		"strings": "on"
+	},
+	"tailwindCSS.experimental.classRegex": [],
+	"tailwindCSS.validate": true
 }

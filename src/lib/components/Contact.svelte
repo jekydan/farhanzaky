@@ -3,6 +3,15 @@
 	import Card from './ui/Card.svelte';
 	import Button from './ui/Button.svelte';
 
+	// =====================================================
+	// FORMSPREE SETUP:
+	// 1. Daftar gratis di https://formspree.io
+	// 2. Buat form baru, masukkan email: farhanzaky24@gmail.com
+	// 3. Ganti FORMSPREE_FORM_ID di bawah dengan ID form kamu
+	//    (contoh: 'xpwzgkdb' — terlihat di URL form kamu)
+	// =====================================================
+	const FORMSPREE_FORM_ID = 'xkodwepd';
+
 	// Form states using Svelte 5 runes
 	let name = $state('');
 	let email = $state('');
@@ -37,13 +46,36 @@
 
 		formStatus = 'submitting';
 
-		// Simulate API request
-		setTimeout(() => {
-			formStatus = 'success';
-			name = '';
-			email = '';
-			message = '';
-		}, 1500);
+		try {
+			const response = await fetch(`https://formspree.io/f/${FORMSPREE_FORM_ID}`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Accept: 'application/json'
+				},
+				body: JSON.stringify({
+					name: name.trim(),
+					email: email.trim(),
+					message: message.trim()
+				})
+			});
+
+			if (response.ok) {
+				formStatus = 'success';
+				name = '';
+				email = '';
+				message = '';
+			} else {
+				const data = await response.json();
+				formStatus = 'error';
+				errorMessage =
+					data?.errors?.[0]?.message ??
+					'Gagal mengirim pesan. Pastikan Form ID Formspree sudah benar.';
+			}
+		} catch {
+			formStatus = 'error';
+			errorMessage = 'Terjadi kesalahan jaringan. Silakan coba lagi.';
+		}
 	}
 
 	const socialLinks = [
@@ -137,9 +169,9 @@
 							<div class="flex flex-col">
 								<span class="text-[10px] font-mono text-slate-500 uppercase">EMAIL</span>
 								<a
-									href="mailto:farhanzaky@gmail.com"
+									href="mailto:farhanzaky24@gmail.com"
 									class="text-sm text-slate-200 hover:text-accent-cyan transition-colors"
-									>farhanzaky@gmail.com</a
+									>farhanzaky24@gmail.com</a
 								>
 							</div>
 						</div>
@@ -240,7 +272,7 @@
 											d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
 										/>
 									</svg>
-									<span>Pesan terkirim secara simulasi! Terima kasih.</span>
+									<span>Pesan berhasil terkirim! Terima kasih, akan segera dibalas. 🎉</span>
 								</div>
 							{/if}
 

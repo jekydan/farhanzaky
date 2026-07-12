@@ -2,6 +2,7 @@ import prettier from 'eslint-config-prettier';
 import path from 'node:path';
 import js from '@eslint/js';
 import svelte from 'eslint-plugin-svelte';
+import svelteParser from 'svelte-eslint-parser';
 import { defineConfig, includeIgnoreFile } from 'eslint/config';
 import globals from 'globals';
 import ts from 'typescript-eslint';
@@ -12,9 +13,9 @@ export default defineConfig(
 	includeIgnoreFile(gitignorePath),
 	js.configs.recommended,
 	ts.configs.recommended,
-	svelte.configs.recommended,
+	svelte.configs['flat/recommended'],
 	prettier,
-	svelte.configs.prettier,
+	svelte.configs['flat/prettier'],
 	{
 		languageOptions: { globals: { ...globals.browser, ...globals.node } },
 		rules: {
@@ -26,9 +27,8 @@ export default defineConfig(
 	{
 		files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
 		languageOptions: {
+			parser: svelteParser,
 			parserOptions: {
-				projectService: true,
-				extraFileExtensions: ['.svelte'],
 				parser: ts.parser
 			}
 		}
@@ -38,7 +38,8 @@ export default defineConfig(
 		// 'svelte/button-has-type': 'error'
 		rules: {
 			'svelte/no-navigation-without-resolve': 'off',
-			'svelte/no-at-html-tags': 'off'
+			'svelte/no-at-html-tags': 'off',
+			'no-undef': 'off'
 		}
 	}
 );
