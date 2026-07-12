@@ -52,40 +52,36 @@
 							glow={true}
 							class="p-5 h-full flex flex-col justify-between group hover:border-glow transition-all duration-300"
 						>
-							<!-- Custom Visual Certificate Badge Mockup -->
+							<!-- Certificate Thumbnail -->
 							<div
-								class="relative h-40 rounded-xl bg-slate-950 border border-slate-900 overflow-hidden flex items-center justify-center p-4 mb-4"
+								class="relative h-44 rounded-xl bg-slate-950 border border-slate-900 overflow-hidden flex items-center justify-center mb-4"
 							>
-								<!-- Glowing Aura Background -->
-								<div
-									class="absolute inset-0 bg-linear-to-tr {cert.gradient} opacity-20 group-hover:opacity-30 transition-opacity"
-								></div>
-								<!-- Certificate Border Line Mockup -->
-								<div class="absolute inset-2 border border-slate-800/40 rounded-lg"></div>
-
-								<!-- Mock Credential Seal SVG -->
-								<div class="relative z-10 flex flex-col items-center gap-2 text-center">
+								{#if cert.image}
+									<!-- Gambar sertifikat asli -->
+									<img
+										src={cert.image}
+										alt={cert.name}
+										class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+									/>
+									<!-- Overlay gradient bawah -->
+									<div class="absolute bottom-0 left-0 right-0 h-12 bg-linear-to-t from-slate-950/80 to-transparent"></div>
+								{:else}
+									<!-- Fallback: Glowing Aura Background -->
 									<div
-										class="w-12 h-12 rounded-full bg-linear-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/10"
-									>
-										<svg
-											class="w-6 h-6 text-slate-950"
-											fill="none"
-											viewBox="0 0 24 24"
-											stroke="currentColor"
-											stroke-width="2.5"
+										class="absolute inset-0 bg-linear-to-tr {cert.gradient} opacity-20 group-hover:opacity-30 transition-opacity"
+									></div>
+									<div class="absolute inset-2 border border-slate-800/40 rounded-lg"></div>
+									<div class="relative z-10 flex flex-col items-center gap-2 text-center">
+										<div
+											class="w-12 h-12 rounded-full bg-linear-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/10"
 										>
-											<path
-												stroke-linecap="round"
-												stroke-linejoin="round"
-												d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-											/>
-										</svg>
+											<svg class="w-6 h-6 text-slate-950" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+												<path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+											</svg>
+										</div>
+										<span class="text-[9px] font-mono text-slate-500 uppercase tracking-widest">{cert.publisher}</span>
 									</div>
-									<span class="text-[9px] font-mono text-slate-500 uppercase tracking-widest"
-										>{cert.publisher}</span
-									>
-								</div>
+								{/if}
 							</div>
 
 							<!-- Content details -->
@@ -152,79 +148,37 @@
 				</svg>
 			</button>
 
-			<!-- Diploma Frame Visual Mockup -->
-			<div
-				class="relative aspect-4/3 rounded-xl bg-slate-950 border-4 border-double border-slate-850 p-6 md:p-8 flex flex-col justify-between items-center text-center shadow-inner mb-6 overflow-hidden"
-			>
-				<!-- Background Glowing ambient -->
-				<div class="absolute inset-0 bg-linear-to-tr {selectedCert.gradient} opacity-20"></div>
-				<div class="absolute inset-4 border border-slate-900/60 rounded"></div>
-
-				<!-- Header -->
-				<div class="relative z-10 flex flex-col items-center">
-					<div
-						class="w-10 h-10 rounded-full bg-linear-to-br from-amber-400 to-amber-600 flex items-center justify-center mb-2 shadow-lg shadow-amber-500/10"
-					>
-						<svg
-							class="w-5 h-5 text-slate-950"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							stroke-width="2"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-							/>
-						</svg>
-					</div>
-					<span class="text-[9px] font-mono tracking-widest text-accent-cyan uppercase"
-						>CERTIFICATE OF ACHIEVEMENT</span
-					>
+			<!-- Preview Sertifikat Asli -->
+			{#if selectedCert.image}
+				<div class="relative rounded-xl overflow-hidden mb-6 border border-slate-800 shadow-xl">
+					<img
+						src={selectedCert.image}
+						alt={selectedCert.name}
+						class="w-full object-contain max-h-[60vh]"
+					/>
 				</div>
-
-				<!-- Body -->
-				<div class="relative z-10">
-					<span class="text-[10px] font-mono text-slate-500 italic block mb-1"
-						>this is proudly presented to</span
-					>
-					<h4
-						class="font-display font-extrabold text-2xl text-white tracking-wide border-b border-slate-800 pb-2 mb-3"
-					>
-						FARHAN ZAKY
-					</h4>
-					<span class="text-[11px] font-mono text-slate-400"
-						>for successfully completing the curriculum for</span
-					>
-					<p class="font-sans font-bold text-sm text-slate-200 mt-1 max-w-sm">
-						{selectedCert.name}
-					</p>
-				</div>
-
-				<!-- Footer -->
+			{:else}
+				<!-- Fallback: Diploma Frame Visual Mockup -->
 				<div
-					class="relative z-10 w-full flex items-end justify-between text-left border-t border-slate-900/60 pt-3"
+					class="relative aspect-4/3 rounded-xl bg-slate-950 border-4 border-double border-slate-850 p-6 md:p-8 flex flex-col justify-between items-center text-center shadow-inner mb-6 overflow-hidden"
 				>
-					<div class="flex flex-col gap-0.5">
-						<span class="text-[8px] font-mono text-slate-500 uppercase">ISSUED BY</span>
-						<span class="text-[10px] font-sans font-bold text-slate-350"
-							>{selectedCert.publisher}</span
-						>
+					<div class="absolute inset-0 bg-linear-to-tr {selectedCert.gradient} opacity-20"></div>
+					<div class="absolute inset-4 border border-slate-900/60 rounded"></div>
+					<div class="relative z-10 flex flex-col items-center">
+						<span class="text-[9px] font-mono tracking-widest text-accent-cyan uppercase">CERTIFICATE OF ACHIEVEMENT</span>
 					</div>
-
-					<div class="flex flex-col gap-0.5 text-center">
-						<span class="text-[8px] font-mono text-slate-500 uppercase font-medium">YEAR</span>
-						<span class="text-[10px] font-sans font-bold text-accent-cyan">{selectedCert.year}</span
-						>
+					<div class="relative z-10">
+						<h4 class="font-display font-extrabold text-2xl text-white tracking-wide border-b border-slate-800 pb-2 mb-3">
+							FARHAN ZAKY
+						</h4>
+						<p class="font-sans font-bold text-sm text-slate-200 mt-1 max-w-sm">{selectedCert.name}</p>
 					</div>
-
-					<div class="flex flex-col gap-0.5 text-right">
-						<span class="text-[8px] font-mono text-slate-500 uppercase">VERIFIED</span>
-						<span class="text-[9px] font-mono text-accent-mint font-semibold">SECURE / AUTH</span>
+					<div class="relative z-10 w-full flex items-end justify-between border-t border-slate-900/60 pt-3">
+						<span class="text-[10px] font-sans font-bold text-slate-350">{selectedCert.publisher}</span>
+						<span class="text-[10px] font-sans font-bold text-accent-cyan">{selectedCert.year}</span>
 					</div>
 				</div>
-			</div>
+			{/if}
 
 			<!-- Modal Footer -->
 			<div class="flex items-center justify-between gap-4">

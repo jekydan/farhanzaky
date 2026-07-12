@@ -181,8 +181,8 @@
 						View Projects
 					</Button>
 
-					<!-- Mock Download CV Button -->
-					<Button variant="outline" href="#" download="CV_Farhan_Zaky.pdf">
+					<!-- Download CV Button -->
+					<Button variant="outline" href="/cv/CV_Farhan_Zaky.pdf" download="CV_Farhan_Zaky.pdf">
 						<svg
 							class="w-4 h-4"
 							fill="none"
